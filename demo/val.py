@@ -25,7 +25,7 @@ class ImageDataset(Dataset):
             return data
 
 def validate(model, dataloader):
-    print('验证')
+    print('val')
     model.eval()
     val_running_loss = 0.0
     val_running_correct = 0
@@ -39,13 +39,12 @@ def validate(model, dataloader):
             val_running_correct += (preds == torch.max(target, 1)[1]).sum().item()
         val_loss = val_running_loss / len(dataloader.dataset)
         val_accuracy = 100. * val_running_correct / len(dataloader.dataset)
-        print(f'验证集 损失值: {val_loss:.4f}, 验证集 准确率: {val_accuracy:.2f}')
+        print(f'loss: {val_loss:.4f}, accuracy: {val_accuracy:.2f}')
         return val_loss, val_accuracy
 
 for epoch in range(epochs):
     print(f"Epoch {epoch + 1} of {epochs}")
 
-    # 调用训练函数和验证函数
     train_epoch_loss, train_epoch_accuracy = fit(model, trainloader)
     val_epoch_loss, val_epoch_accuracy = validate(model, valloader)
     train_loss.append(train_epoch_loss)
@@ -53,10 +52,8 @@ for epoch in range(epochs):
     val_loss.append(val_epoch_loss)
     val_accuracy.append(val_epoch_accuracy)
 
-    # 调用early stopping方法
     early_stopping(val_epoch_loss)
 
-    # 如果触发了early stopping，提前结束训练
     if early_stopping.early_stop:
         print("Early stopping triggered!")
         break
