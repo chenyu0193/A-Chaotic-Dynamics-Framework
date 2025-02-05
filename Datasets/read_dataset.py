@@ -22,16 +22,6 @@ class Timer(object):
             print('elapsed time: %f ms' % self.msecs)
 
 class Events(object):
-    """
-    Temporal Difference events.
-    data: a NumPy Record Array with the following named fields
-        x: pixel x coordinate, unsigned 16bit int
-        y: pixel y coordinate, unsigned 16bit int
-        p: polarity value, boolean. False=off, True=on
-        ts: timestamp in microseconds, unsigned 64bit int
-    width: The width of the frame. Default = 304.
-    height: The height of the frame. Default = 240.
-    """
 
     def __init__(self, num_events, width=304, height=240):
         """num_spikes: number of events this instance will initially contain"""
