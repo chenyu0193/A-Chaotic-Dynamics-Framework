@@ -12,7 +12,8 @@ Event cameras are bio-inspired vision sensors that encode visual information wit
 The effectiveness of our method is validated through integration with conventional classification networks, achieving state-of-the-art classification accuracy on the N-Caltech101 and N-CARS datasets, with results of 84.3% and 99.9%, respectively. Our method improves the accuracy of event camera-based object classification while significantly enhancing the generalization and stability of event representation.
 
 ## Installation
-• Python 3.9+ and CUDA12.0
+• Python 3.9+ and CUDA 12.0
+
 • PyTorch 2.4.1+ and corresponding torchvision
 
 ## Quick Start
