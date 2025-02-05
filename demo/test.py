@@ -31,4 +31,4 @@ with torch.no_grad():
         total += target.size(0)
         correct += (predicted == torch.max(target, 1)[1]).sum().item()
 
-print('模型在测试集上的分类准确率 : %0.3f %%' % (100 * correct / total))
+print('accuray  : %0.3f %%' % (100 * correct / total))
