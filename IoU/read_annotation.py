@@ -19,9 +19,9 @@ def read_annotation(filename):
     box_contour = np.array(box_contour[2:10])
     f.close()
     bbox = np.array([
-            box_contour[0], box_contour[1],  # upper-left corner
-            box_contour[2] - box_contour[0],  # width
-            box_contour[5] - box_contour[1],  # height
+            box_contour[0], box_contour[1], 
+            box_contour[2] - box_contour[0],  
+            box_contour[5] - box_contour[1],  
         ])
     # bbox[:2] = np.maximum(bbox[:2], 0)
-    return bbox  #.reshape((1, 1, -1))
+    return bbox  
