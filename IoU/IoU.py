@@ -13,8 +13,7 @@ import draw_rect
 import recover_bbox
 import calculate_iou
 
-# x_max, y_max, x, y = recover_bbox(bbox[0], bbox[1], bbox[2], bbox[3])
-# print(x, y, x_max, y_max)
+
 polarity_dict = {}
 p_dict = {}
 length = []
@@ -36,9 +35,7 @@ root_folder = "C:/eventCamera/Caltech101"
 subfolders = os.listdir(root_folder)
 sorted_file_list = sorted(subfolders)
 for subfolder in sorted_file_list:
-    # 使用os.path.join拼接完整的路径
     subfolder_path = os.path.join(root_folder, subfolder)
-    # 判断是否为文件夹
     if os.path.isdir(subfolder_path):
         sub1.append(subfolder_path)
 sub2 = []
@@ -46,32 +43,25 @@ root_folder = "C:/eventCamera/Caltech101_annotations"
 subfolders = os.listdir(root_folder)
 sorted_file_list = sorted(subfolders)
 for subfolder in sorted_file_list:
-    # 使用os.path.join拼接完整的路径
     subfolder_path = os.path.join(root_folder, subfolder)
-    # 判断是否为文件夹
     if os.path.isdir(subfolder_path):
         sub2.append(subfolder_path)
 
 for i in range(len(sub1)-1):
-    folder_path = sub1[i]  # 替换为你的文件夹路径
-    # 获取文件夹中的所有文件
+    folder_path = sub1[i] 
     file_list = os.listdir(folder_path)
-    # 按文件名进行排序
     sorted_file_list = sorted(file_list)
-    # 遍历排序后的文件列表并处理每个文件
     for file_name in sorted_file_list:
         file_path = os.path.join(folder_path, file_name)
-        if os.path.isfile(file_path):  # 确保是文件而不是文件夹
+        if os.path.isfile(file_path):  
             file1.append(file_path)
 
-    folder_path = sub2[i]  # 替换为你的文件夹路径
-    # 获取文件夹中的所有文件
+    folder_path = sub2[i]  
     file_list = os.listdir(folder_path)
     sorted_file_list = sorted(file_list)
-    # 遍历文件列表并逐个读取文件
     for file_name in sorted_file_list:
         file_path = os.path.join(folder_path, file_name)
-        if os.path.isfile(file_path):  # 确保是文件而不是文件夹
+        if os.path.isfile(file_path): 
             file2.append(file_path)
     print(file1)
     for j in range(len(file2)-1):
@@ -89,13 +79,11 @@ for i in range(len(sub1)-1):
             # td_img[datum['y'].item(0), datum['x'].item(0)] = datum['p'].item(0)
             # print(td_img)
             if 0 <= datum['x'].item(0) < td.width and 0 <= datum['y'].item(0) < td.height:
-                # 将事件存储在对应像素的列表中
-                pixel_idx = datum['y'].item(0) * td.width + datum['x'].item(0)
+                 th + datum['x'].item(0)
                 if pixel_idx not in polarity_dict:
                     polarity_dict[pixel_idx] = []
                 polarity_dict[pixel_idx].append(datum['p'].item(0))
 
-        # 输出每个像素的极性列表
         for pixel_idx, polarity_list in polarity_dict.items():
             # print(f"Pixel ({pixel_idx % td.width}, {pixel_idx // td.width}): {polarity_list}")
             length.append(len(polarity_list))
@@ -124,29 +112,29 @@ for i in range(len(sub1)-1):
                     y0 = math.exp(-ae) * y0 + ve * z0
                     z0 = 1 / (1 + math.exp(-(x0 - y0)))
                     sequence[k] = z0
-                cwtmatr, frequencies = pywt.cwt(sequence, np.arange(1, 4), wavename)  # 连续小波变换模块
-                len1, len2 = cwtmatr.shape  # 输出为：-0.0532094 +0.11571999j -0.05402121-0.11622215j  0.06683362+0.01142197j...的复数数组，实部有正有负
+                cwtmatr, frequencies = pywt.cwt(sequence, np.arange(1, 4), wavename) 
+                len1, len2 = cwtmatr.shape 
                 for i1 in range(0, len1, 1):
                     for j1 in range(0, len2, 1):
                         video_real[i1, j1] = cwtmatr[i1, j1].real
-                img[n, m] = np.sum(video_real)  # 输出为：-0.0532094  -0.05402121  0.06683362 ...,与cwtmatr同shape
-                if img[n, m] < 0:  # 输出为混沌信号的实部和大于0，周期信号的实部和小于0
+                img[n, m] = np.sum(video_real)  
+                if img[n, m] < 0: 
                     result_img[n, m] = 255
                 else:
                     result_img[n, m] = 0
         cv2.imwrite('/Users/chenyu/Desktop/frame.jpg', result_img)
-        image = cv2.imread('/Users/chenyu/Desktop/frame.jpg')  # 读取图片
+        image = cv2.imread('/Users/chenyu/Desktop/frame.jpg')  
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-        gray = cv2.GaussianBlur(gray, (7, 7), 0)  # 执行高斯滤波
-        edged = cv2.Canny(gray, 50, 100)  # 执行Canny边缘检测
-        edged = cv2.dilate(edged, None, iterations=1)  # 执行腐蚀和膨胀处理, 先膨胀后腐蚀，闭运算，填充物体内黑洞，连接邻近物体和平滑边界
+        gray = cv2.GaussianBlur(gray, (7, 7), 0) 
+        edged = cv2.Canny(gray, 50, 100)  
+        edged = cv2.dilate(edged, None, iterations=1)  
         edged = cv2.erode(edged, None, iterations=1)
-        cnts = cv2.findContours(edged.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)  # 在边缘映射中寻找轮廓
+        cnts = cv2.findContours(edged.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)  
         cnts = imutils.grab_contours(cnts)
-        (cnts, _) = contours.sort_contours(cnts)  # 对轮廓点进行排序
-        colors = ((0, 0, 255), (240, 0, 159), (0, 165, 255), (255, 255, 0), (255, 0, 255))  # 设置显示颜色
+        (cnts, _) = contours.sort_contours(cnts) 
+        colors = ((0, 0, 255), (240, 0, 159), (0, 165, 255), (255, 255, 0), (255, 0, 255))  
         orig = image.copy()
-        orig = draw_rect(cnts, orig)  # 画框
+        orig = draw_rect(cnts, orig)  
 
         for p, boxs in p_dict.items():
             area.append(p)
