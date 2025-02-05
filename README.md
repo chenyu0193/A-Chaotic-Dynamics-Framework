@@ -1,7 +1,5 @@
 # A Chaotic Dynamics Framework Inspired by Dorsal Stream for Event Signal Processing
-
-![Uploading fk.png…]()
-
+![fk](https://github.com/user-attachments/assets/fd8fca1d-96bb-4e37-933b-cef65bd0c37d)
 ##  Highlights
 • We propose an event stream processing framework inspired by the brain’s dorsal visual pathway. We introduce the spatial-temporal information encoding mechanism of the brain’s dorsal pathway, also known as the ”where” pathway, into the event stream data processing framework, effectively establishing a high-order mapping fromevent streams to event frames.
 
