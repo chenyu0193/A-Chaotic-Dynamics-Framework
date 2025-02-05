@@ -21,16 +21,16 @@ The effectiveness of our method is validated through integration with convention
 
 ## Quick Start
 with data:
-```
+```python
 python datasets/N-CAR.py
 ```
 
 with train:
-```
+```python
  python demo/train.py
 ```
 
 with test:
-```
+```python
  python demo/test.py
 ```
