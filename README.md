@@ -21,7 +21,7 @@ The effectiveness of our method is validated through integration with convention
 
 ## Quick Start
 with data:
-   python datasets/N-CAR.py
+    python datasets/N-CAR.py
 
 with train:
  python demo/train.py
