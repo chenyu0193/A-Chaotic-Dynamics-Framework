@@ -1,5 +1,4 @@
 # A Chaotic Dynamics Framework Inspired by Dorsal Stream for Event Signal Processing
-![fk](https://github.com/user-attachments/assets/cabecd49-6038-4056-b7b4-a8f816b89b63)
 ![Uploading BN.png…]()
 
 ##  Highlights
