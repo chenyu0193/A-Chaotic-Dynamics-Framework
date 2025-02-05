@@ -24,8 +24,13 @@ with data:
 ```
 python datasets/N-CAR.py
 ```
+
 with train:
+```
  python demo/train.py
+```
 
 with test:
+```
  python demo/test.py
+```
